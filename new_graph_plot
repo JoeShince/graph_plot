@@ -1,0 +1,83 @@
+'''
+
+python script to plot the pattern in the list from the list of given integers
+'''
+
+# import matplotlib.pyplot as plt
+
+test_list = [3, 1, 2, 3, 6, 2, 3, 6, 2, 3, 6, 3, 2, 3, 6, 2, 3, 4, 3, 2, 5, 4, 2, 1, 2, 1, 2, 3, 1, 2, 6, 2, 3, 6, 2, 3,
+             6, 3, 2, 3, 1, 5, 3, 2, 1, 2, 4, 2, 1, 8, 1, 2]
+test_list_length = len(test_list)
+
+result_list = []
+for i in range(test_list_length):
+    if i == 0:
+        result_list.append(test_list[i])
+    else:
+        if i % 2 == 0:
+            result_list.append(result_list[i - 1] + test_list[i])
+        else:
+            result_list.append(result_list[i - 1] - test_list[i])
+print(len(test_list))
+print(len(result_list))
+# plt.plot(result_list)
+# plt.show()
+i = 0
+for j in test_list:
+    i = i + j
+y_length_max = max(result_list) + 3
+x_length_max = i + 1
+
+result_array_length = len(result_list) - 1
+
+inner_array = []
+outer_array = []
+result_list.insert(0, 0)
+result_iterate = 0
+
+initial = 0
+end = 0
+# i=0
+list_of_array_combinations = []
+output_array = [None] * y_length_max
+
+x_pos = 0
+for i in range(0, result_array_length):
+    if i%2 == 0:
+        upward = True
+        initial = result_list[i]
+        end = result_list[i + 1] - 1
+    else:
+        upward = False
+        initial = result_list[i + 1] - 1
+        end = result_list[i]
+
+    for j in range(initial, end):
+        if output_array[j]:
+            temp = output_array[j]
+        else:
+            temp = [None] * x_length_max
+        if upward:
+            temp[x_pos] = '/'
+        else:
+            temp[x_pos] = '\\'
+        output_array[j] = temp
+
+        x_pos = x_pos + 1
+
+print(output_array)
+
+# for j in range(0, y_length_max):
+#
+#     initial = result_list[result_iterate]
+#     end = result_list[result_iterate + 1]
+#     for k in range(initial, end-1):
+#         slash_array = [k,i]
+#         i = i + 1
+#         list_of_array_combinations.append(slash_array)
+#
+#
+#     inner_array = []
+
+
+
